@@ -1,0 +1,86 @@
+#include <iostream>
+#include <string>
+#include "Stack.h"
+using namespace std;
+
+int showMenu() {
+    cout << "Bracket Checker Menu:\n";
+    cout << "1) Check expression\n";
+    cout << "2) Exit\n";
+    cout << "Enter choice: ";
+    int choice = 0;
+    cin >> choice;
+    cin.ignore(); 
+    return choice;
+}
+
+bool checkBrackets(const string& s) {
+    Stack<char> st;
+
+    for (int i = 0; i < s.size(); i++) {
+        char c = s[i];
+        if (c == '(' || c == '[' || c == '{') {
+            st.push(c);
+        }
+        else if (c == ')' || c == ']' || c == '}') {
+            if (st.empty()) {
+                cout << "Error: extra closing bracket '" << c << "' at position " << i + 1 << endl;
+                return false;
+            }
+            char top = st.top();
+            st.pop();
+            if ((c == ')' && top != '(') ||
+                (c == ']' && top != '[') ||
+                (c == '}' && top != '{')) {
+                cout << "Error: mismatch at position " << i + 1 << " ('" << top << "' does not match '" << c << "')" << endl;
+                return false;
+            }
+        }
+        else if (c == ';') {
+            break;
+        }
+    }
+
+    if (!st.empty()) {
+        cout << "Error: missing closing bracket for '" << st.top() << "'" << endl;
+        return false;
+    }
+
+    cout << "Brackets are correctly placed!" << endl;
+    return true;
+}
+
+template<class T>
+void startProgram() {
+    bool isExit = false;
+    while (!isExit) {
+        system("cls");
+        int choice = showMenu();
+        switch (choice) {
+        case 1: {
+            system("cls");
+            cout << "Enter expression (end with ';'):\n";
+            string expr;
+            getline(cin, expr);
+            cout << endl;
+            checkBrackets(expr);
+            cout << endl;
+            system("pause");
+            break;
+        }
+        case 2:
+            system("cls");
+            cout << "Goodbye!" << endl;
+            isExit = true;
+            break;
+        default:
+            cout << "Invalid choice! Try again.\n";
+            system("pause");
+            break;
+        }
+    }
+}
+
+int main() {
+    startProgram<char>();
+}
