@@ -23,7 +23,6 @@ public:
     int getSize();
 };
 
-// -------------------- Реалізація шаблонів --------------------
 
 template <class T>
 Queue<T>::Queue(int size)
