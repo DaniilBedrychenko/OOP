@@ -28,12 +28,12 @@ class DLList
 public:
     DLList() : head(nullptr), tail(nullptr), count(0) {}
 
-    // Конструктор копіювання
+   
     DLList(const DLList<T>& other) : head(nullptr), tail(nullptr), count(0) {
         copyFrom(other);
     }
 
-    // Оператор присвоєння
+ 
     DLList<T>& operator=(const DLList<T>& other) {
         if (this != &other) {
             removeAll();
@@ -42,7 +42,7 @@ public:
         return *this;
     }
 
-    // Деструктор
+  
     ~DLList() { removeAll(); }
 
     inline int getLength() const { return count; }
