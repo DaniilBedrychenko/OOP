@@ -30,7 +30,7 @@ public:
         copyFrom(other);
     }
 
-
+  
     SingleLinkedList<T>& operator=(const SingleLinkedList<T>& other) {
         if (this != &other) {
             removeAll();
@@ -39,7 +39,7 @@ public:
         return *this;
     }
 
- 
+    
     ~SingleLinkedList() { removeAll(); }
 
     inline int getLength() const { return count; }
@@ -107,3 +107,27 @@ public:
 
     void print() const {
         if (count == 0) {
+            cout << "List is empty" << endl;
+            return;
+        }
+        cout << "Count: " << count << endl;
+        Node* temp = head;
+        int i = 0;
+        while (temp) {
+            cout << temp->data;
+            if (i < count - 1) cout << " -> ";
+            temp = temp->next;
+            i++;
+        }
+        cout << endl;
+    }
+
+    bool find(const T& value) const {
+        Node* temp = head;
+        while (temp) {
+            if (temp->data == value) return true;
+            temp = temp->next;
+        }
+        return false;
+    }
+};
